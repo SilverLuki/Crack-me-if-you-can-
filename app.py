@@ -66,7 +66,7 @@ TIERS = {
         "name": "What a salt does",
         "concept": "This one ships with an extra value alongside the hash. hashcat needs both to have any chance.",
         "algo": "sha256_salted",
-        "source": "mixed",
+        "source": "seclists",
         "stars": 25,
         "hint": "The file has `hash:salt`. Check the hashcat mode for salted SHA-256 and make sure you're passing the whole line, not just the hash.",
     },
@@ -268,7 +268,7 @@ def generate_tier_target(player_id, plaintext, tier):
         target_hash = sha256(word)
         salt = None
     elif tier == 4:
-        word = pick_unique_word("mixed")
+        word = pick_unique_word("seclists")
         salt = os.urandom(4).hex()
         target_hash = sha256_salted(word, salt)
     elif tier == 5:
