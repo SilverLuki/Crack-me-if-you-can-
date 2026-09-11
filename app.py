@@ -339,6 +339,12 @@ def finalize_registration():
 app = Flask(__name__)
 app.secret_key = APP_SECRET
 
+# Self-healing: make sure the schema exists the moment this module is
+# imported, regardless of whether a separate build-time init step ran.
+# CREATE TABLE IF NOT EXISTS makes this safe to call on every import,
+# including once per gunicorn worker.
+init_db()
+
 
 @app.teardown_appcontext
 def close_db(exception):
