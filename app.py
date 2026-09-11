@@ -41,14 +41,14 @@ INSERT_MIN, INSERT_MAX = 200, 300
 TIERS = {
     1: {
         "name": "Meet hashcat",
-        "concept": "Crack your own password with the exact command below. This is the whole custom wordlist — your password is hiding in it.",
+        "concept": "Crack your own password with the exact command below.",
         "algo": "md5",
         "source": "custom",
         "stars": 10,
     },
     2: {
         "name": "The wordlist matters",
-        "concept": "Same command, same wordlist... but it won't work this time. This word isn't in the custom list — you'll need a bigger one.",
+        "concept": "Same command, same wordlist... but it won't work this time. This word isn't in the custom list  you'll need a bigger one.",
         "algo": "md5",
         "source": "rockyou",
         "stars": 15,
@@ -56,11 +56,11 @@ TIERS = {
     },
     3: {
         "name": "Identify before you crack",
-        "concept": "Your old command runs but finds nothing. Something about this hash is different — figure out what before you try again.",
+        "concept": "Your old command runs but finds nothing. Something about this hash is different  figure out what before you try again.",
         "algo": "sha256",
         "source": "seclists",
         "stars": 20,
-        "hint": "Run `hashid target.hash` — the mode number you were using might not be right anymore.",
+        "hint": "Run `hashid target.hash`  the mode number you were using might not be right anymore.",
     },
     4: {
         "name": "What a salt does",
@@ -72,7 +72,7 @@ TIERS = {
     },
     5: {
         "name": "Why some hashes survive",
-        "concept": "This is a bcrypt hash. Run the same attack and watch the H/s counter — this is deliberately, and correctly, not meant to crack in the room.",
+        "concept": "This is a bcrypt hash. Run the same attack and watch the H/s counter  this is deliberately, and correctly, not meant to crack in the room.",
         "algo": "bcrypt",
         "source": "holdback_pool",
         "stars": 30,
