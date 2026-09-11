@@ -3,7 +3,7 @@ services:
     name: securinets-crackme
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app"
+    startCommand: "python init_db.py && gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 60 app:app"
     envVars:
       - key: APP_SECRET
         generateValue: true
