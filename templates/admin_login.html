@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Admin login</h1>
+<p class="lede">For Luki / organizers only — controls when registration closes and tiers are generated.</p>
+
+<div class="card glow">
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="POST" action="{{ url_for('admin_login') }}">
+    <label for="password">Admin password</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Log in</button>
+  </form>
+</div>
+
+{% endblock %}

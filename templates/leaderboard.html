@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard — Crack Me If You Can</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  body { padding: 0; }
+  .wrap { max-width: 900px; }
+  .rank { font-size: 1.1rem; font-weight: 800; width: 40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Securinets ISI">
+    <div>
+      <div class="title">Live Leaderboard</div>
+      <div class="subtitle">Crack Me If You Can — Securinets ISI</div>
+    </div>
+  </div>
+
+  <div class="badge-row">
+    {% for fs in first_solvers %}
+      <span class="pill tier-active">🥇 Tier {{ fs['tier'] }} first: {{ fs['codename'] }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th class="rank">#</th><th>Codename</th><th>Tier</th><th>Stars</th></tr>
+      </thead>
+      <tbody id="board">
+        {% for p in players %}
+          <tr class="{{ 'top3' if loop.index <= 3 else '' }}">
+            <td class="rank">{{ loop.index }}</td>
+            <td>{{ p['codename'] }}</td>
+            <td>{{ p['current_tier'] if p['current_tier'] <= max_tier else max_tier }} / {{ max_tier }}</td>
+            <td>{{ p['stars'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if not closed %}
+    <p class="small">Waiting for registration to close — leaderboard will start filling in once the challenge opens.</p>
+  {% endif %}
+</div>
+
+<script>
+  // Simple polling refresh so the projector view updates live without
+  // a full page reload.
+  async function refresh() {
+    try {
+      const res = await fetch("{{ url_for('leaderboard_data') }}");
+      const players = await res.json();
+      const body = document.getElementById("board");
+      body.innerHTML = players.map((p, i) => `
+        <tr class="${i < 3 ? 'top3' : ''}">
+          <td class="rank">${i + 1}</td>
+          <td>${p.codename}</td>
+          <td>${Math.min(p.current_tier, {{ max_tier }})} / {{ max_tier }}</td>
+          <td>${p.stars}</td>
+        </tr>
+      `).join("");
+    } catch (e) { /* ignore transient errors */ }
+  }
+  setInterval(refresh, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>You're in, {{ player['codename'] }}</h1>
+<p class="lede">Hang tight — the challenge opens for everyone at once, right when the organizer closes registration.</p>
+
+<div class="card center">
+  <p class="small">{{ count }} member{{ 's' if count != 1 else '' }} have joined so far.</p>
+  <p class="small">Get your Kali VM ready: <code>hashcat</code> and <code>hashid</code> should both work from a terminal.</p>
+</div>
+
+<meta http-equiv="refresh" content="5">
+
+{% endblock %}

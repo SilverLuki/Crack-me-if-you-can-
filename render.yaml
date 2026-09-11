@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: securinets-crackme
+    env: python
+    buildCommand: "pip install -r requirements.txt && python init_db.py"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: APP_SECRET
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        sync: false

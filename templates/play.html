@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if finished %}
+  <h1>You finished all {{ max_tier }} tiers 🎉</h1>
+  <p class="lede">Nice work, {{ player['codename'] }}. Total stars: <strong>{{ player['stars'] }}</strong></p>
+  <div class="card center">
+    <a class="btn" href="{{ url_for('leaderboard') }}">See the leaderboard</a>
+  </div>
+{% else %}
+
+  <div class="progress">
+    {% for i in range(1, max_tier + 1) %}
+      <div class="seg {{ 'done' if i < tier else ('current' if i == tier else '') }}"></div>
+    {% endfor %}
+  </div>
+
+  <span class="pill tier-active">Tier {{ tier }} / {{ max_tier }}</span>
+  <span class="pill">{{ player['stars'] }} stars</span>
+
+  <h1 style="margin-top:14px;">{{ cfg['name'] }}</h1>
+  <p class="lede">{{ cfg['concept'] }}</p>
+
+  <div class="card glow">
+    <label>Your target hash{{ ':salt' if target['salt'] else '' }}</label>
+    <div class="mono">{{ target['target_hash'] }}{{ (':' + target['salt']) if target['salt'] else '' }}</div>
+
+    {% if tier == 1 %}
+      <label>Run this on your Kali VM</label>
+      <div class="mono">hashcat -m 0 -a 0 target.hash securinets_custom_wordlist.txt</div>
+      <p class="small">Don't have the custom wordlist yet? <a href="{{ url_for('luki_download') }}">Download it here</a> and save it as <code>securinets_custom_wordlist.txt</code> next to your <code>target.hash</code> file.</p>
+    {% endif %}
+
+    {% if tier == 5 %}
+      <p class="small">Run the same style of attack against this one and just watch the <code>H/s</code> counter. This is expected to NOT crack in the room — that's the lesson.</p>
+      <form method="POST" action="{{ url_for('skip_tier5') }}">
+        <button type="submit" class="secondary">I've seen it struggle — mark as complete</button>
+      </form>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('submit_answer') }}" style="margin-top:16px;">
+      <label for="answer">What did you crack it to?</label>
+      <input type="text" id="answer" name="answer" placeholder="paste the cracked password here" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    {% if cfg.get('hint') %}
+      <details class="hint-box">
+        <summary>Need a nudge? (costs a few stars)</summary>
+        <p>{{ cfg['hint'] }}</p>
+        <form method="POST" action="{{ url_for('use_hint') }}">
+          <button type="submit" class="secondary">Use this hint</button>
+        </form>
+      </details>
+    {% endif %}
+  </div>
+
+  <p class="small"><a href="{{ url_for('leaderboard') }}">View live leaderboard →</a></p>
+{% endif %}
+
+{% endblock %}

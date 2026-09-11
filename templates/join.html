@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if closed %}
+  <h1>Registration is closed</h1>
+  <p class="lede">The event has already started — ask an organizer to get you set up if you haven't joined yet.</p>
+{% else %}
+  <h1>Pick a codename and a test password</h1>
+  <p class="lede">This is the start of tonight's workshop. In a minute, you'll be cracking your own password with hashcat, on your own laptop.</p>
+
+  <div class="card glow">
+    <div class="warn">⚠️ Use a <strong>test</strong> password only — never a real password you use anywhere. It'll get hashed and used as tonight's challenge.</div>
+
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+    <form method="POST" action="{{ url_for('join') }}">
+      <label for="codename">Codename</label>
+      <input type="text" id="codename" name="codename" placeholder="e.g. GhostFox" required>
+
+      <label for="password">Test password</label>
+      <input type="text" id="password" name="password" placeholder="e.g. XX@00000000@" required>
+
+      <button type="submit">Join the workshop</button>
+    </form>
+  </div>
+
+  <p class="small">Already joined? <a href="{{ url_for('waiting') }}">Go to your session</a></p>
+{% endif %}
+
+{% endblock %}

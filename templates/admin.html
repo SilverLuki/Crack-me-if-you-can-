@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Admin panel</h1>
+<p class="lede">{{ count }} member{{ 's' if count != 1 else '' }} registered so far.</p>
+
+<div class="card glow">
+  {% if closed %}
+    <p><span class="pill tier-active">Registration closed</span></p>
+    <p class="small">Tiers have been generated, the custom wordlist is finalized, and <code>/luki</code> is live.</p>
+    <a class="btn" href="{{ url_for('luki_download') }}">Download the custom wordlist</a>
+  {% else %}
+    <p><span class="pill">Registration open</span></p>
+    <p class="small">Once everyone's joined, close registration to lock in tiers, pick the Tier 5 holdback passwords, and generate the final custom wordlist.</p>
+    <form method="POST" action="{{ url_for('admin_close_registration') }}" onsubmit="return confirm('Close registration and generate all tiers now? This can\'t be undone.');">
+      <button type="submit" class="danger">Close registration &amp; generate tiers</button>
+    </form>
+  {% endif %}
+</div>
+
+<p class="small"><a href="{{ url_for('leaderboard') }}">Open leaderboard →</a></p>
+
+{% endblock %}

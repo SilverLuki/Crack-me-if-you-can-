@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Crack Me If You Can — Securinets ISI{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Securinets ISI">
+    <div>
+      <div class="title">Securinets ISI</div>
+      <div class="subtitle">Crack Me If You Can — First Event</div>
+    </div>
+  </div>
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

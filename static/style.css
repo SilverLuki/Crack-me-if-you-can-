@@ -1,0 +1,247 @@
+:root {
+  --navy: #14152b;
+  --navy-card: #1e2040;
+  --navy-card-light: #262848;
+  --border: #33355c;
+  --silver: #e8e9f5;
+  --silver-dim: #a8aad0;
+  --teal: #2dd4bf;
+  --teal-dark: #14b8a6;
+  --amber: #f0b429;
+  --green: #34d399;
+  --red: #f87171;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 50% -10%, #23255030, transparent 60%), var(--navy);
+  color: var(--silver);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.brand img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: 0 0 24px #2dd4bf55;
+}
+
+.brand .title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.brand .subtitle {
+  font-size: 0.8rem;
+  color: var(--silver-dim);
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 6px;
+}
+
+.lede {
+  color: var(--silver-dim);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 18px;
+}
+
+.card.glow {
+  box-shadow: 0 0 0 1px #2dd4bf22, 0 8px 30px -10px #2dd4bf33;
+}
+
+label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--silver-dim);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--silver);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.warn {
+  background: #f0b42918;
+  border: 1px solid #f0b42955;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+
+button, .btn {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: #06282a;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button.secondary, .btn.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--silver);
+}
+
+button.danger {
+  background: linear-gradient(135deg, #f87171, #dc2626);
+  color: #2b0b0b;
+}
+
+.error {
+  color: var(--red);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.mono {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  word-break: break-all;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--navy-card-light);
+  color: var(--silver-dim);
+  border: 1px solid var(--border);
+}
+
+.pill.tier-active {
+  background: #2dd4bf22;
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.progress {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 20px;
+}
+
+.progress .seg {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--navy-card-light);
+}
+
+.progress .seg.done {
+  background: var(--teal);
+}
+
+.progress .seg.current {
+  background: var(--amber);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--silver-dim);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+tr.top3 td {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.hint-box {
+  background: var(--navy-card-light);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  color: var(--silver-dim);
+  margin-top: 10px;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: 0.8rem;
+  color: var(--silver-dim);
+}
+
+a {
+  color: var(--teal);
+}
