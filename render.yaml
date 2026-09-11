@@ -7,4 +7,5 @@ services:
     envVars:
       - key: APP_SECRET
         generateValue: true
-      - key: ra90267035
+      - key: ADMIN_PASSWORD
+        sync: true
