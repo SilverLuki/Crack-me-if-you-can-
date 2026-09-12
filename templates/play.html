@@ -27,19 +27,19 @@
 
     {% if tier == 1 %}
       <label>Run this on your Kali VM</label>
-      <div class="mono">hashcat -m 0 -a 0 target.hash securinets_custom_wordlist.txt</div>
+      <div class="mono">hashcat -m 0 -a 0 target.hash ~/Downloads/securinets_custom_wordlist.txt</div>
       <p class="small">Don't have the custom wordlist yet? <a href="{{ url_for('luki_download') }}">Download it here</a> and save it as <code>securinets_custom_wordlist.txt</code> next to your <code>target.hash</code> file.</p>
     {% endif %}
 
     {% if tier == 5 %}
-      <p class="small">Run the same style of attack against this one and just watch the <code>H/s</code> counter. This is expected to NOT crack in the room — that's the lesson.</p>
+      <p class="small">Run the same style of attack against this one and just watch the <code>H/s</code> counter.</p>
       <form method="POST" action="{{ url_for('skip_tier5') }}">
-        <button type="submit" class="secondary">I've seen it struggle — mark as complete</button>
+        <button type="submit" class="secondary">I give up</button>
       </form>
     {% endif %}
 
     <form method="POST" action="{{ url_for('submit_answer') }}" style="margin-top:16px;">
-      <label for="answer">What did you crack it to?</label>
+      <label for="answer">did you crack it ?</label>
       <input type="text" id="answer" name="answer" placeholder="paste the cracked password here" required>
       <button type="submit">Submit</button>
     </form>
