@@ -41,7 +41,7 @@ INSERT_MIN, INSERT_MAX = 200, 300
 TIERS = {
     1: {
         "name": "Meet hashcat",
-        "concept": "Crack your own password with the exact command below.",
+        "concept": "Crack the password with the exact command below.",
         "algo": "md5",
         "source": "custom",
         "stars": 10,
@@ -60,19 +60,19 @@ TIERS = {
         "algo": "sha256",
         "source": "seclists",
         "stars": 20,
-        "hint": "Run `hashid target.hash`  the mode number you were using might not be right anymore.",
+        "hint": "Run `hashcat --identify target.hash`  the mode number you were using might not be right anymore.",
     },
     4: {
         "name": "What a salt does",
         "concept": "This one ships with an extra value alongside the hash. hashcat needs both to have any chance.",
         "algo": "sha256_salted",
-        "source": "seclists",
+        "source": "mixed",
         "stars": 25,
-        "hint": "The file has `hash:salt`. Check the hashcat mode for salted SHA-256 and make sure you're passing the whole line, not just the hash.",
+        "hint": "The file has `hash:salt`. Check the hashcat mode for salted SHA-256.",
     },
     5: {
         "name": "Why some hashes survive",
-        "concept": "This is a bcrypt hash. Run the same attack and watch the H/s counter  this is deliberately, and correctly, not meant to crack in the room.",
+        "concept": "This is a bcrypt hash. Run the same attack and watch .",
         "algo": "bcrypt",
         "source": "holdback_pool",
         "stars": 30,
@@ -268,7 +268,7 @@ def generate_tier_target(player_id, plaintext, tier):
         target_hash = sha256(word)
         salt = None
     elif tier == 4:
-        word = pick_unique_word("seclists")
+        word = pick_unique_word("mixed")
         salt = os.urandom(4).hex()
         target_hash = sha256_salted(word, salt)
     elif tier == 5:
